@@ -1,0 +1,55 @@
+
+<form [formGroup]="form">
+  <span class="p-float-label">
+<input id="title"
+       type="text"
+       pInputText
+       formControlName="inputtext"/>
+  <label for="title">Title</label>
+</span>
+
+  <br/>
+
+  <button type="button"
+          pButton
+          label="PrimeNG"
+          (click)="upper()"></button>
+</form>
+
+<p-treeTable [value]="nodes"
+             [columns]="cols"
+             [paginator]="true"
+             [rows]="10">
+  <ng-template pTemplate="caption">
+    Nodes
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of cols"
+          [ttSortableColumn]="col.field">
+        {{col.header}}
+        <p-treeTableSortIcon [field]="col.field"></p-treeTableSortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body"
+               let-rowNode
+               let-rowData="rowData">
+    <tr>
+      <td *ngFor="let col of cols; let i=index"
+          ttEditableColumn
+          [ngClass]="{'p-toggler-column': i === 0}">
+        <p-treeTableToggler [rowNode]="rowNode"
+                            *ngIf="i == 0"></p-treeTableToggler>
+        <p-treeTableCellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText
+                   type="text"
+                   [(ngModel)]="rowData[col.field]">
+          </ng-template>
+          <ng-template pTemplate="output">{{rowData[col.field]}}</ng-template>
+        </p-treeTableCellEditor>
+      </td>
+    </tr>
+  </ng-template>
+</p-treeTable>

@@ -1,0 +1,21 @@
+<div class="card mb-4" *ngIf="book">
+  <div class="card-body bg-light">
+      <img class="img-thumbnail float-end"
+        src="//api.angular.schule/avatar/{{ book.rating }}" alt="Bild mit {{ book.rating }} Katzen">
+    <div class="card-title">
+      <h2>
+        {{ book.title }}
+        <span class="badge bg-secondary me-2">{{ book.rating }}</span>
+        <ng-container *ngFor="let s of amountOfStars">⭐️</ng-container>
+      </h2>
+    </div>
+    <p>{{ book.description }}</p>
+
+    <button [disabled]="book.rating <= 1" class="btn btn-primary me-2" (click)="doRateDown()">-1</button>
+    <button [disabled]="book.rating >= 5" class="btn btn-primary me-2" (click)="doRateUp()">+1</button>
+    <button class="btn btn-secondary" [routerLink]="['/books', book.isbn]">Details</button>
+
+    {{ log() }}
+
+  </div>
+</div>
