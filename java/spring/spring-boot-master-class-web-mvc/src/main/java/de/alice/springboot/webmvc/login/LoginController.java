@@ -18,12 +18,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String goToLoginPage() {
+    public String showLoginPage() {
         return "login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String goToWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
+    public String showWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
         if (authenticationService.authenticate(name, password)) {
             model.put("name", name);
             return "welcome";
