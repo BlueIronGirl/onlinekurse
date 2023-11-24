@@ -48,7 +48,7 @@ public class TodoController {
             return "todo";
         }
 
-        todoService.addTodo(todo.getUsername(), todo.getDescription(), todo.getTargetDate(), todo.isDone());
+        todoService.addTodo(todo);
         return "redirect:list-todos";
     }
 
