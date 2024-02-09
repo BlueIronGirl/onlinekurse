@@ -1,18 +1,20 @@
 package rewards.internal.aspects;
 
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Component;
 import rewards.internal.exception.RewardDataAccessException;
 
-
+@Component
 @Aspect	
 public class DBExceptionHandlingAspect {
 	
 	public static final String EMAIL_FAILURE_MSG = "Failed sending an email to Mister Smith : ";
 	
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
 	//	TODO-10 (Optional): Use AOP to log an exception.
@@ -21,7 +23,7 @@ public class DBExceptionHandlingAspect {
 	//  - Configure this advice method to enable logging of
 	//	  exceptions thrown by Repository class methods.
 	//	- Select the advice type that seems most appropriate.
-	
+	@AfterThrowing(pointcut = "execution(public * rewards.internal.*.*Repository.*(..))", throwing = "e")
 	public void implExceptionHandling(RewardDataAccessException e) {
 		// Log a failure warning
 		logger.warn(EMAIL_FAILURE_MSG + e + "\n");
