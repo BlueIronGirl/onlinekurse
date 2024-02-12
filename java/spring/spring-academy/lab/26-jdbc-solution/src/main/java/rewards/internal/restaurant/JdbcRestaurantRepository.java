@@ -17,7 +17,6 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	public JdbcRestaurantRepository(JdbcTemplate jdbcTemplate) {
-
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
