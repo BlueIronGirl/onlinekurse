@@ -32,10 +32,10 @@ public class StubRestaurantRepository implements RestaurantRepository {
 		restaurantsByMerchantNumber.put(restaurant.getNumber(), restaurant);
 	}
 
-	public Restaurant findByMerchantNumber(String merchantNumber) {
-		Restaurant restaurant = (Restaurant) restaurantsByMerchantNumber.get(merchantNumber);
+	public Restaurant findByNumber(String number) {
+		Restaurant restaurant = (Restaurant) restaurantsByMerchantNumber.get(number);
 		if (restaurant == null) {
-			throw new ObjectRetrievalFailureException(Restaurant.class, merchantNumber);
+			throw new ObjectRetrievalFailureException(Restaurant.class, number);
 		}
 		return restaurant;
 	}
