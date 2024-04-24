@@ -47,7 +47,7 @@ function processTransactions(transactions) {
             console.log('Invalid transaction type!');
             continue;
         }
-        
+
         if (transaction.type === 'PAYMENT') {
             processCreditCardPayment(transaction);
             processPayPalPayment(transaction);
@@ -55,12 +55,12 @@ function processTransactions(transactions) {
         } else if (transaction.type === 'REFUND') {
             processCreditCardRefund(transaction);
             processPayPalRefund(transaction); {
-            processPlanRefund(transaction);
+                processPlanRefund(transaction);
+            }
+        } else {
+            console.log('Invalid transaction type!', transaction);
         }
-    } else {
-        console.log('Invalid transaction type!', transaction);
     }
-}
 }
 
 function processCreditCardPayment(transaction) {
