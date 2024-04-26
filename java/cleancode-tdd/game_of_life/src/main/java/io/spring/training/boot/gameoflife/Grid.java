@@ -2,36 +2,47 @@ package io.spring.training.boot.gameoflife;
 
 import lombok.Getter;
 
-import java.util.random.RandomGenerator;
+import java.util.Arrays;
 
 @Getter
 public class Grid {
   private Cell[][] cells;
 
-  public Grid(int rows, int columns) {
-    this.cells = new Cell[rows][columns];
+  public Grid(Cell[][] cells) {
+    this.cells = cells;
   }
 
   public Cell getCell(int row, int column) {
     return this.cells[row][column];
   }
 
+  public boolean getCellState(int row, int column) {
+    if (row < 0 || row >= this.cells.length || column < 0 || column >= this.cells[0].length) {
+      return false;
+    }
+
+    return cells[row][column].isAlive();
+  }
+
   public void updateCellAlive(int row, int column, boolean alive) {
     this.cells[row][column].setAlive(alive);
   }
 
-  public void fillGridRandomly() {
-    RandomGenerator randomGenerator = RandomGenerator.getDefault();
-    for (int i = 0; i < this.cells.length; i++) {
-      for (int j = 0; j < this.cells[i].length; j++) {
-        this.cells[i][j] = new Cell();
-        updateCellAlive(i, j, randomGenerator.nextBoolean());
+  public Cell[] getNeighborsOfCell(int row, int column) {
+    Cell[] neighbors = new Cell[(this.cells.length * this.cells[1].length) - 1];
+
+    int zaehler = 0;
+
+    for (int i = row - 1; i <= row + 1; i++) {
+      for (int j = column - 1; j <= column + 1; j++) {
+        if (i == row && j == column) {
+          continue;
+        }
+        neighbors[zaehler++] = new Cell(getCellState(i, j));
       }
     }
-  }
 
-  public void fillWithFixedValues(Cell[][] fixedValues) {
-    this.cells = fixedValues;
+    return neighbors;
   }
 
   public void printFullGrid() {
@@ -49,4 +60,29 @@ public class Grid {
     System.out.println("---------------------");
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Grid) {
+      Grid s = (Grid) obj;
+      if (Arrays.deepEquals(s.cells, this.cells))
+        return true;
+    }
+    return super.equals(obj);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder s = new StringBuilder();
+    for (Cell[] cell : cells) {
+      for (Cell value : cell) {
+        if (value.isAlive()) {
+          s.append("#");
+        } else {
+          s.append("~");
+        }
+      }
+      s.append("\n");
+    }
+    return s.toString();
+  }
 }
