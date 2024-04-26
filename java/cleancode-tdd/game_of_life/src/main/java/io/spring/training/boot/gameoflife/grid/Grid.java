@@ -1,4 +1,4 @@
-package io.spring.training.boot.gameoflife;
+package io.spring.training.boot.gameoflife.grid;
 
 import lombok.Getter;
 
@@ -29,7 +29,7 @@ public class Grid {
   }
 
   public Cell[] getNeighborsOfCell(int row, int column) {
-    Cell[] neighbors = new Cell[(this.cells.length * this.cells[1].length) - 1];
+    Cell[] neighbors = new Cell[8];
 
     int zaehler = 0;
 
@@ -45,25 +45,9 @@ public class Grid {
     return neighbors;
   }
 
-  public void printFullGrid() {
-    System.out.println("---------------------");
-
-    for (int row = 0; row < cells.length; row++) {
-      for (int column = 0; column < cells[row].length; column++) {
-        Cell cell = getCell(row, column);
-        System.out.print(cell.isAlive() ? "+" : "-");
-        System.out.print(" ");
-      }
-      System.out.println();
-    }
-
-    System.out.println("---------------------");
-  }
-
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Grid) {
-      Grid s = (Grid) obj;
+    if (obj instanceof Grid s) {
       if (Arrays.deepEquals(s.cells, this.cells))
         return true;
     }
@@ -73,16 +57,21 @@ public class Grid {
   @Override
   public String toString() {
     StringBuilder s = new StringBuilder();
+    s.append("---------------------\n");
+
     for (Cell[] cell : cells) {
       for (Cell value : cell) {
         if (value.isAlive()) {
-          s.append("#");
+          s.append("+ ");
         } else {
-          s.append("~");
+          s.append("- ");
         }
       }
       s.append("\n");
     }
+
+    s.append("---------------------\n");
+
     return s.toString();
   }
 }

@@ -1,35 +1,14 @@
-package io.spring.training.boot.gameoflife;
+package io.spring.training.boot.gameoflife.grid;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class GridServiceTest {
-  private Grid grid;
-  private GridService gridService;
-
-  @BeforeEach
-  void setUp() {
-    Cell[][] cells = new Cell[3][3];
-    cells[0][0] = new Cell(true);
-    cells[0][1] = new Cell(true);
-    cells[0][2] = new Cell(true);
-
-    cells[1][0] = new Cell(true);
-    cells[1][1] = new Cell(true);
-    cells[1][2] = new Cell(true);
-
-    cells[2][0] = new Cell(true);
-    cells[2][1] = new Cell(true);
-    cells[2][2] = new Cell(true);
-
-    gridService = new GridService();
-    grid = new Grid(cells);
-  }
+class SpielrundeTest {
+  private Spielrunde spielrunde = new Spielrunde();
 
   private static Stream<Object> provideTestNewStateCell() {
     return Stream.of(
@@ -49,7 +28,8 @@ class GridServiceTest {
   @ParameterizedTest
   @MethodSource("provideTestNewStateCell")
   public void testNewStateCell(boolean cellAlive, int liveNeighbors, boolean expectedResult) {
-    boolean result = gridService.newStateCell(new Cell(cellAlive), liveNeighbors);
+    boolean result = spielrunde.newStateCell(new Cell(cellAlive), liveNeighbors);
     assertEquals(expectedResult, result);
   }
+
 }

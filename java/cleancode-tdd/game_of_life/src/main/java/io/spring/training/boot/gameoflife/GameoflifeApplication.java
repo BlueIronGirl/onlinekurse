@@ -1,5 +1,8 @@
 package io.spring.training.boot.gameoflife;
 
+import io.spring.training.boot.gameoflife.grid.Cell;
+import io.spring.training.boot.gameoflife.grid.Grid;
+import io.spring.training.boot.gameoflife.grid.GridService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,11 +26,11 @@ public class GameoflifeApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		this.grid = new Grid(getRandomGrid(8, 8));
-		this.grid.printFullGrid();
+		System.out.println(this.grid);
 
 		for (int i = 0; i < 10; i++) {
 			gridService.updateGrid(this.grid);
-			this.grid.printFullGrid();
+			System.out.println(this.grid);
 		}
 	}
 

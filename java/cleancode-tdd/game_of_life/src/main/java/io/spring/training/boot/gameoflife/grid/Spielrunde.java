@@ -1,11 +1,8 @@
-package io.spring.training.boot.gameoflife;
-
-import org.springframework.stereotype.Service;
+package io.spring.training.boot.gameoflife.grid;
 
 import java.util.Arrays;
 
-@Service
-public class GridService {
+public class Spielrunde {
   private static final int GOOD = 3;
   private static final int ACCEPTABLE = 2;
 
@@ -40,7 +37,7 @@ public class GridService {
     return aliveNeighbors == ACCEPTABLE || aliveNeighbors == GOOD;
   }
 
-  long liveNeighbors(Grid grid, int row, int column) {
+  private long liveNeighbors(Grid grid, int row, int column) {
     return Arrays.stream(grid.getNeighborsOfCell(row, column)).filter(Cell::isAlive).count();
   }
 }

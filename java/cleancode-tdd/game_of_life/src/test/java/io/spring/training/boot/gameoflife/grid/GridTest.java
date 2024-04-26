@@ -1,4 +1,4 @@
-package io.spring.training.boot.gameoflife;
+package io.spring.training.boot.gameoflife.grid;
 
 import org.junit.jupiter.api.Test;
 
