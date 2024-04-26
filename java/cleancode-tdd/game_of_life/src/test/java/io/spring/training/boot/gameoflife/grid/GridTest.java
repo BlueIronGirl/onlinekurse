@@ -121,7 +121,14 @@ class GridTest {
     Grid gridToTest = new Grid(grid);
 
     String actual = gridToTest.toString();
+    String expected = """
+        ---------------------
+        - + -\s
+        - + -\s
+        - + -\s
+        ---------------------
+        """;
 
-    assertEquals("~#~\n~#~\n~#~\n", actual);
+    assertEquals(expected, actual);
   }
 }

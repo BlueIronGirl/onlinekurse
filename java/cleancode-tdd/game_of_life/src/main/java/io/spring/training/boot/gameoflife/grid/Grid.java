@@ -1,10 +1,12 @@
 package io.spring.training.boot.gameoflife.grid;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 
 @Getter
+@Setter
 public class Grid {
   private Cell[][] cells;
 

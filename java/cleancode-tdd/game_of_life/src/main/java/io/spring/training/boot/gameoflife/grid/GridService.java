@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class GridService {
 
   public void updateGrid(Grid grid) {
-    new Spielrunde().updateGrid(grid);
+    grid.setCells(new Spielrunde().generateNewGrid(grid));
   }
 }

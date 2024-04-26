@@ -6,13 +6,17 @@ public class Spielrunde {
   private static final int GOOD = 3;
   private static final int ACCEPTABLE = 2;
 
-  public void updateGrid(Grid grid) {
+  public Cell[][] generateNewGrid(Grid grid) {
+    Cell[][] cells = new Cell[grid.getCells().length][grid.getCells()[0].length];
+
     for (int row = 0; row < grid.getCells().length; row++) {
       for (int column = 0; column < grid.getCells()[row].length; column++) {
         boolean cellALive = checkCellAlive(grid, row, column);
-        grid.updateCellAlive(row, column, cellALive);
+        cells[row][column] = new Cell(cellALive);
       }
     }
+
+    return cells;
   }
 
   public boolean checkCellAlive(Grid grid, int row, int column) {
