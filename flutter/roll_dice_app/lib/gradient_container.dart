@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:roll_dice_app/styled_text.dart';
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key});
+  const GradientContainer(this.colors, {super.key});
+
+  final List<Color> colors;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [Colors.blue, Colors.blueGrey],
+            colors: colors,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
       child: const Center(
-        child: StyledText(),
+        child: StyledText('Alice'),
       ),
     );
   }
